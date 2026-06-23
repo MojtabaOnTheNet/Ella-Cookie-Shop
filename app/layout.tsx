@@ -1,14 +1,12 @@
-import { Geist, Geist_Mono, Inter } from "next/font/google"
+import { Vazirmatn } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'})
-
-const fontMono = Geist_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
+const fontPersian = Vazirmatn({
+  subsets: ["arabic"],
+  variable: "--font-persian",
 })
 
 export default function RootLayout({
@@ -18,11 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="fa"
       suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, "font-sans", inter.variable)}
+      className={cn("antialiased", fontPersian.className)}
     >
-      <body>
+      <body dir="rtl">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
