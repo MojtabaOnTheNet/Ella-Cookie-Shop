@@ -123,7 +123,7 @@ export function SiteNavbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="fixed inset-x-0 top-20 z-50 m-5 rounded-3xl bg-background/50 px-4 py-6 ring-2 ring-border backdrop-blur-lg transition-all duration-300 md:hidden"
+            className="fixed inset-x-0 top-20 z-50 m-5 rounded-3xl bg-background/50 px-4 py-6 ring-2 ring-border backdrop-blur-lg md:hidden"
           >
             <div className="flex flex-col-reverse items-center justify-center gap-8">
               <div className="z-50 flex w-1/2 items-center justify-center gap-2 rounded-full bg-primary px-4 py-2 text-primary-foreground">

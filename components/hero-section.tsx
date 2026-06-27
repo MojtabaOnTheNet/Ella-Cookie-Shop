@@ -38,13 +38,15 @@ export function HeroSection() {
           transition={{ duration: 0.7, delay: 0.25 }}
           className="mt-8 flex flex-col items-center justify-center gap-3"
         >
-          <Button
-            size="lg"
-            variant="outline"
-            className="peer w-full rounded-full border-primary/30 bg-transparent px-7 text-primary sm:w-auto"
-          >
-            <a href="#sweets">مشاهده منو</a>
-          </Button>
+          <a href="#sweets">
+            <Button
+              size="lg"
+              variant="outline"
+              className="peer w-full rounded-full border-primary/30 bg-transparent px-7 text-primary sm:w-auto"
+            >
+              مشاهده منو
+            </Button>
+          </a>
           <div className="flex flex-col items-center justify-center transition-all duration-200 ease-in-out peer-hover:translate-y-2">
             <ChevronDown className="h-6 w-6 text-primary" />
             <ChevronDown className="h-4 w-4 text-accent-foreground" />
