@@ -10,12 +10,12 @@ function ThemeProvider({
   return (
     <NextThemesProvider
       attribute="class"
-      defaultTheme="system"
+      defaultTheme="light"
       enableSystem
       disableTransitionOnChange
       {...props}
     >
-      <ThemeHotkey />
+      {/* <ThemeHotkey /> */}
       {children}
     </NextThemesProvider>
   )
@@ -34,7 +34,7 @@ function isTypingTarget(target: EventTarget | null) {
   )
 }
 
-function ThemeHotkey() {
+/* function ThemeHotkey() {
   const { resolvedTheme, setTheme } = useTheme()
 
   React.useEffect(() => {
@@ -66,6 +66,6 @@ function ThemeHotkey() {
   }, [resolvedTheme, setTheme])
 
   return null
-}
+} */
 
 export { ThemeProvider }
