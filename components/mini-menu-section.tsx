@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "motion/react"
-import { Plus } from "lucide-react"
+import { ArrowUpLeft, Package, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Reveal } from "@/components/motion-primitives"
 import Image from "next/image"
@@ -12,44 +12,23 @@ const treats = [
   {
     name: "کوکی نیویورکی",
     desc: "ترد از بیرون، نرم و شکلاتی از درون",
-    price: 200000,
+    price: 800000,
     img: "/chocolate-chip-cookie.png",
     tag: "محبوب",
   },
   {
-    name: "کوکی نیویورکی",
+    name: "کوکی دابل چاکلت",
     desc: "ترد از بیرون، نرم و شکلاتی از درون",
-    price: 200000,
-    img: "/strawberry-cake-slice.png",
-    tag: "فصلی",
+    price: 850000,
+    img: "/double-chocolate-chip-cookie.png",
+    tag: "به صرفه",
   },
   {
-    name: "کوکی نیویورکی",
+    name: "کوکی رول دارچینی",
     desc: "ترد از بیرون، نرم و شکلاتی از درون",
-    price: 200000,
-    img: "/macaron-stack.png",
-    tag: null,
-  },
-  {
-    name: "کوکی نیویورکی",
-    desc: "ترد از بیرون، نرم و شکلاتی از درون",
-    price: 200000,
-    img: "/pink-donut.png",
-    tag: null,
-  },
-  {
-    name: "کوکی نیویورکی",
-    desc: "ترد از بیرون، نرم و شکلاتی از درون",
-    price: 200000,
-    img: "/fudge-brownie.png",
-    tag: "محبوب",
-  },
-  {
-    name: "کوکی نیویورکی",
-    desc: "ترد از بیرون، نرم و شکلاتی از درون",
-    price: 200000,
+    price: 600000,
     img: "/cinnamon-roll.png",
-    tag: "جدید",
+    tag: "پرفروش",
   },
 ]
 
@@ -67,6 +46,10 @@ export function MiniMenuSection() {
           <p className="mt-4 text-pretty text-muted-foreground">
             همه‌چیز تهیه شده طبق استانداردهای بهداشتی و کاملا خانگی
           </p>
+          <div className="mt-3 flex items-center justify-center gap-3 text-2xl font-bold text-balance text-foreground sm:text-3xl">
+            <Package size={35} />
+            <span>پک‌های ده‌تایی</span>
+          </div>
         </Reveal>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -86,7 +69,11 @@ export function MiniMenuSection() {
                     height={144}
                     className="relative h-36 w-36 object-contain drop-shadow-[0_12px_16px_rgba(80,45,20,0.25)]"
                     whileHover={{ rotate: 8, scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 250, damping: 12 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 250,
+                      damping: 12,
+                    }}
                   />
                   {t.tag && (
                     <span className="absolute top-0 right-0 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-foreground">
@@ -115,6 +102,16 @@ export function MiniMenuSection() {
             </Reveal>
           ))}
         </div>
+        <Reveal className="mx-auto mt-12 max-w-2xl text-center">
+          <Button
+            size="lg"
+            variant="outline"
+            className="group w-auto rounded-full border-primary/30 bg-primary px-7 text-primary-foreground"
+          >
+            <span> منوی کامل</span>
+            <ArrowUpLeft className="transition-all duration-200 group-hover:-translate-x-1" />
+          </Button>
+        </Reveal>
       </div>
     </section>
   )
