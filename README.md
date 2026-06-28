@@ -1,21 +1,39 @@
-# Next.js template
+# 🍪 Ella Cookies and Sweets
 
-This is a Next.js template with shadcn/ui.
+A modern website for **Ella Cookies and Sweets**, showcasing delicious cookies, desserts, and sweet treats with a clean, responsive design.
 
-## Adding components
+## 🌐 Live Website
 
-To add components to your app, run the following command:
+**Visit:** https://ella-cookie-shop.vercel.app/
 
-```bash
-npx shadcn@latest add button
+## 🚀 Features
+
+- Responsive design
+- Beautiful product showcase
+- Fast and modern UI
+- Easy navigation
+
+## 🛠️ Tech Stack
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+
+## ⚡ future backend
+
+- fastapi
+- mongodb
+- redis
+
+## 💻 Running Locally
+
+Just clone or fork the project and run the following command after installing dependencies:
+
+```
+npm run dev
 ```
 
-This will place the ui components in the `components` directory.
+---
 
-## Using components
-
-To use the components in your app, import them as follows:
-
-```tsx
-import { Button } from "@/components/ui/button";
-```
+Made with ❤️ for Ella Cookies and Sweets.
