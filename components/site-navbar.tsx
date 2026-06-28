@@ -7,6 +7,7 @@ import Image from "next/image"
 import { User } from "lucide-react"
 import GoUpChevron from "./go-up-chevron"
 import { useClickOutside } from "@mantine/hooks"
+import Link from "next/link"
 
 const links = [
   { label: "سفارش", href: "order" },
@@ -61,10 +62,13 @@ export function SiteNavbar() {
         }`}
       >
         <nav className="mx-auto flex h-full items-center justify-between px-4 py-6 sm:px-6">
-          <div className="z-50 hidden items-center justify-center gap-2 rounded-full bg-primary px-4 py-2 text-primary-foreground md:flex">
+          <Link
+            href="/register"
+            className="z-50 hidden items-center justify-center gap-2 rounded-full bg-primary px-4 py-2 text-primary-foreground md:flex"
+          >
             <User size={22} />
-            <span>ثبت نام</span>
-          </div>
+            <span>ثبت نام | ورود</span>
+          </Link>
 
           <div className="mx-auto hidden items-center gap-8 md:flex">
             {links.map((l) => (
@@ -126,10 +130,13 @@ export function SiteNavbar() {
             className="fixed inset-x-0 top-20 z-50 m-5 rounded-3xl bg-background/50 px-4 py-6 ring-2 ring-border backdrop-blur-lg md:hidden"
           >
             <div className="flex flex-col-reverse items-center justify-center gap-8">
-              <div className="z-50 flex w-1/2 items-center justify-center gap-2 rounded-full bg-primary px-4 py-2 text-primary-foreground">
+              <Link
+                href="/register"
+                className="z-50 flex w-1/2 items-center justify-center gap-2 rounded-full bg-primary px-4 py-2 text-primary-foreground"
+              >
                 <User size={22} />
-                <span>ثبت نام</span>
-              </div>
+                <span>ثبت نام | ورود</span>
+              </Link>
               {links.map((l) => (
                 <a
                   key={l.href}
