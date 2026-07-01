@@ -120,7 +120,7 @@ function IconContainer({
               initial={{ opacity: 0, y: 10, x: "-50%" }}
               animate={{ opacity: 1, y: 0, x: "-50%" }}
               exit={{ opacity: 0, y: 2, x: "-50%" }}
-              className="bg-muted-forground absolute -top-8 w-fit rounded-full border px-2 py-0.5 text-sm whitespace-pre text-muted-foreground"
+              className="bg-muted-forground absolute -top-8 hidden w-fit rounded-full border px-2 py-0.5 text-sm whitespace-pre text-muted-foreground md:block"
             >
               {title}
             </motion.div>
@@ -133,7 +133,9 @@ function IconContainer({
           {icon}
         </motion.div>
       </motion.div>
-      <div className="text-sm font-medium md:hidden">{title}</div>
+      <div className="text-sm font-medium whitespace-nowrap md:hidden">
+        {title}
+      </div>
     </a>
   )
 }
