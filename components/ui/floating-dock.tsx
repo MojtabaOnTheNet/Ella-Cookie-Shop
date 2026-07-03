@@ -15,6 +15,8 @@ import {
   useSpring,
   useTransform,
 } from "motion/react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 import { useRef, useState } from "react"
 
@@ -104,15 +106,20 @@ function IconContainer({
   })
 
   const [hovered, setHovered] = useState(false)
+  const pathname = usePathname()
+  console.log(pathname)
 
   return (
-    <a href={href} className="flex flex-col items-center justify-center gap-1">
+    <Link
+      href={href}
+      className="flex flex-col items-center justify-center gap-1"
+    >
       <motion.div
         ref={ref}
         style={{ width, height }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className="relative flex aspect-square items-center justify-center rounded-full bg-muted"
+        className={`relative flex aspect-square items-center justify-center rounded-full ${pathname === href ? "bg-muted-foreground" : "bg-muted"}`}
       >
         <AnimatePresence>
           {hovered && (
@@ -120,7 +127,7 @@ function IconContainer({
               initial={{ opacity: 0, y: 10, x: "-50%" }}
               animate={{ opacity: 1, y: 0, x: "-50%" }}
               exit={{ opacity: 0, y: 2, x: "-50%" }}
-              className="bg-muted-forground absolute -top-8 hidden w-fit rounded-full border px-2 py-0.5 text-sm whitespace-pre text-muted-foreground md:block"
+              className="absolute -top-8 hidden w-fit rounded-full border px-2 py-0.5 text-sm whitespace-pre text-muted-foreground md:block"
             >
               {title}
             </motion.div>
@@ -128,7 +135,7 @@ function IconContainer({
         </AnimatePresence>
         <motion.div
           style={{ width: widthIcon, height: heightIcon }}
-          className="flex items-center justify-center"
+          className={`flex items-center justify-center ${pathname === href ? "text-muted" : "text-muted-foreground"}`}
         >
           {icon}
         </motion.div>
@@ -136,6 +143,6 @@ function IconContainer({
       <div className="text-sm font-medium whitespace-nowrap md:hidden">
         {title}
       </div>
-    </a>
+    </Link>
   )
 }

@@ -16,23 +16,23 @@ export function BottomNavbar() {
   const links = [
     {
       title: "خانه",
-      icon: <IconHome className="h-full w-full text-muted-foreground" />,
-      href: "#",
+      icon: <IconHome className="h-full w-full" />,
+      href: "/home",
     },
     {
       title: "جستجو",
-      icon: <IconSearch className="h-full w-full text-muted-foreground" />,
-      href: "#",
+      icon: <IconSearch className="h-full w-full" />,
+      href: "/search",
     },
     {
       title: "سبد خرید",
-      icon: <IconBasket className="h-full w-full text-muted-foreground" />,
-      href: "#",
+      icon: <IconBasket className="h-full w-full" />,
+      href: "/cart",
     },
     {
       title: "اکانت",
-      icon: <IconUser className="h-full w-full text-muted-foreground" />,
-      href: "#",
+      icon: <IconUser className="h-full w-full" />,
+      href: "/me",
     },
   ]
   return (
