@@ -6,7 +6,6 @@
  **/
 
 import { cn } from "@/lib/utils"
-import { IconLayoutNavbarCollapse } from "@tabler/icons-react"
 import {
   AnimatePresence,
   MotionValue,
@@ -17,8 +16,17 @@ import {
 } from "motion/react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import {
+  Command,
+  CommandDialog,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command"
 
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export const FloatingDock = ({
   items,
@@ -69,6 +77,7 @@ function IconContainer({
   icon: React.ReactNode
   href: string
 }) {
+  const [open, setOpen] = useState(false) // For the search modal
   let ref = useRef<HTMLDivElement>(null)
 
   let distance = useTransform(mouseX, (val) => {
@@ -107,42 +116,97 @@ function IconContainer({
 
   const [hovered, setHovered] = useState(false)
   const pathname = usePathname()
-  console.log(pathname)
 
   return (
-    <Link
-      href={href}
-      className="flex flex-col items-center justify-center gap-1"
-    >
-      <motion.div
-        ref={ref}
-        style={{ width, height }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-        className={`relative flex aspect-square items-center justify-center rounded-full ${pathname === href ? "bg-primary" : "bg-muted"}`}
-      >
-        <AnimatePresence>
-          {hovered && (
+    <>
+      {href == "/search" ? (
+        <>
+          <div
+            className="flex flex-col items-center justify-center gap-1"
+            onClick={() => {
+              setOpen(true)
+            }}
+          >
             <motion.div
-              initial={{ opacity: 0, y: 10, x: "-50%" }}
-              animate={{ opacity: 1, y: 0, x: "-50%" }}
-              exit={{ opacity: 0, y: 2, x: "-50%" }}
-              className="absolute -top-8 hidden w-fit rounded-full border bg-background px-2 py-0.5 text-sm whitespace-pre text-muted-foreground md:block"
+              ref={ref}
+              style={{ width, height }}
+              onMouseEnter={() => setHovered(true)}
+              onMouseLeave={() => setHovered(false)}
+              className={`relative flex aspect-square items-center justify-center rounded-full ${pathname === href ? "bg-primary" : "bg-muted"}`}
             >
-              {title}
+              <AnimatePresence>
+                {hovered && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, x: "-50%" }}
+                    animate={{ opacity: 1, y: 0, x: "-50%" }}
+                    exit={{ opacity: 0, y: 2, x: "-50%" }}
+                    className="absolute -top-8 hidden w-fit rounded-full border bg-background px-2 py-0.5 text-sm whitespace-pre text-muted-foreground md:block"
+                  >
+                    {title}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              <motion.div
+                style={{ width: widthIcon, height: heightIcon }}
+                className={`flex items-center justify-center ${pathname === href ? "text-muted" : "text-muted-foreground"}`}
+              >
+                {icon}
+              </motion.div>
             </motion.div>
-          )}
-        </AnimatePresence>
-        <motion.div
-          style={{ width: widthIcon, height: heightIcon }}
-          className={`flex items-center justify-center ${pathname === href ? "text-muted" : "text-muted-foreground"}`}
+            <div className="text-sm font-medium whitespace-nowrap md:hidden">
+              {title}
+            </div>
+          </div>
+          <CommandDialog open={open} onOpenChange={setOpen} className="p-1">
+            <Command>
+              <CommandInput placeholder="محصولی را جستجو کنید..." />
+              <CommandList>
+                <CommandEmpty>محصولی یافت نشد</CommandEmpty>
+                <CommandGroup heading="پیشنهادات">
+                  <CommandItem>کوکی</CommandItem>
+                  <CommandItem>دونات</CommandItem>
+                  <CommandItem>کیک</CommandItem>
+                </CommandGroup>
+              </CommandList>
+            </Command>
+          </CommandDialog>
+        </>
+      ) : (
+        <Link
+          href={href}
+          className="flex flex-col items-center justify-center gap-1"
         >
-          {icon}
-        </motion.div>
-      </motion.div>
-      <div className="text-sm font-medium whitespace-nowrap md:hidden">
-        {title}
-      </div>
-    </Link>
+          <motion.div
+            ref={ref}
+            style={{ width, height }}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+            className={`relative flex aspect-square items-center justify-center rounded-full ${pathname === href ? "bg-primary" : "bg-muted"}`}
+          >
+            <AnimatePresence>
+              {hovered && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, x: "-50%" }}
+                  animate={{ opacity: 1, y: 0, x: "-50%" }}
+                  exit={{ opacity: 0, y: 2, x: "-50%" }}
+                  className="absolute -top-8 hidden w-fit rounded-full border bg-background px-2 py-0.5 text-sm whitespace-pre text-muted-foreground md:block"
+                >
+                  {title}
+                </motion.div>
+              )}
+            </AnimatePresence>
+            <motion.div
+              style={{ width: widthIcon, height: heightIcon }}
+              className={`flex items-center justify-center ${pathname === href ? "text-muted" : "text-muted-foreground"}`}
+            >
+              {icon}
+            </motion.div>
+          </motion.div>
+          <div className="text-sm font-medium whitespace-nowrap md:hidden">
+            {title}
+          </div>
+        </Link>
+      )}
+    </>
   )
 }

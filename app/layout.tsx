@@ -4,6 +4,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 import { Metadata } from "next"
+import NextTopLoader from "nextjs-toploader"
 
 const fontPersian = Vazirmatn({
   subsets: ["arabic"],
@@ -27,6 +28,7 @@ export default function RootLayout({
       className={cn("scroll-smooth antialiased", fontPersian.className)}
     >
       <body dir="rtl">
+        <NextTopLoader color="#b67d43" showSpinner={false} />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
