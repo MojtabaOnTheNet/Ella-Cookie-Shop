@@ -14,6 +14,10 @@ const fontPersian = Vazirmatn({
 export const metadata: Metadata = {
   title: "کوکی‌های الا",
   description: "...",
+  robots: {
+    index: false,
+    follow: false,
+  },
 }
 
 export default function RootLayout({
