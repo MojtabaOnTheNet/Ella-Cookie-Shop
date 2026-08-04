@@ -1,7 +1,7 @@
 "use client"
 import { useEffect, useState } from "react"
-import { Category } from "../mock/products"
 import { cn } from "@/lib/utils"
+import { Category } from "@/mock/products"
 
 interface Props {
   categories: Category[]

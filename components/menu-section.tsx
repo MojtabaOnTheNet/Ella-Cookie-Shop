@@ -7,10 +7,11 @@ import {
   ItemTitle,
 } from "@/components/ui/item"
 import Image from "next/image"
-import products from "../mock/products"
 import CategoryNavbar from "./category-navbar"
+import products from "@/mock/products"
 
 const getData = () => {
+  console.log(products)
   return products
 }
 

@@ -1,4 +1,4 @@
-import MenuSection from "../components/menu-section"
+import MenuSection from "@/components/menu-section"
 
 export default function Page() {
   return (
