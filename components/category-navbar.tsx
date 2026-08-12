@@ -2,23 +2,23 @@
 import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 import { Category } from "@/mock/products"
+import { icons } from "lucide-react"
 
 interface Props {
   categories: Category[]
 }
 
 export default function CategoryNavbar({ categories }: Props) {
-  const [active, setActive] = useState(categories[0]?.id)
+  // const [active, setActive] = useState(categories[0]?.id)
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries.find((e) => e.isIntersecting)
-
-        if (visible) {
-          setActive(visible.target.id)
-        }
+        // const visible = entries.find((e) => e.isIntersecting)
+        // if (visible) {
+        //   setActive(visible.target.id)
+        // }
       },
       {
         threshold: 0.5,
@@ -45,7 +45,7 @@ export default function CategoryNavbar({ categories }: Props) {
     <>
       <div
         className={cn(
-          "fixed inset-x-0 top-3 z-50 mx-5 mt-14 rounded-2xl p-1 transition-all duration-300",
+          "fixed inset-x-0 top-3 z-50 mx-5 mt-14 flex justify-center rounded-2xl p-1 transition-all duration-300 lg:mx-auto lg:w-[48.5%]",
           scrolled &&
             "mt-0 bg-background/50 ring-2 ring-border backdrop-blur-md"
         )}
@@ -57,19 +57,22 @@ export default function CategoryNavbar({ categories }: Props) {
           </InputGroupAddon>
         </InputGroup> */}
         <div className="flex items-center justify-around gap-5 md:justify-start md:gap-8">
-          {categories.map((category) => (
-            <a
-              key={category.name}
-              href={`#${category.id}`}
-              // onClick={() => setActive(category.id)}
-              className={
-                "flex size-15 flex-col items-center justify-center rounded-4xl bg-card text-card-foreground"
-              }
-            >
-              <span>{category.emoji}</span>
-              <span>{category.name}</span>
-            </a>
-          ))}
+          {categories.map((category) => {
+            const Icon = icons[category.icon as keyof typeof icons]
+            return (
+              <a
+                key={category.name}
+                href={`#${category.id}`}
+                // onClick={() => setActive(category.id)}
+                className={
+                  "flex size-15 flex-col items-center justify-center rounded-4xl bg-card text-card-foreground"
+                }
+              >
+                <Icon size={20} />
+                <span>{category.name}</span>
+              </a>
+            )
+          })}
         </div>
       </div>
     </>
