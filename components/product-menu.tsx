@@ -18,8 +18,10 @@ import {
   DrawerTitle,
 } from "./ui/drawer"
 import type { Category, Product } from "@/mock/products"
-import { icons } from "lucide-react"
+import { Cookie, icons, Minus, Plus } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { Button } from "./ui/button"
+import { useCartStore } from "@/hooks/useCartStore"
 
 type ProductMenuProps = {
   categories: Category[]
@@ -27,6 +29,15 @@ type ProductMenuProps = {
 
 const ProductMenu = ({ categories }: ProductMenuProps) => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+
+  const addItem = useCartStore((s) => s.addItem)
+  const updateQuantity = useCartStore((s) => s.updateQuantity)
+  const items = useCartStore((s) => s.items)
+
+  const cartItem = selectedProduct
+    ? items.find((i) => i.product.name === selectedProduct.name)
+    : undefined
+  const quantityInCart = cartItem?.quantity ?? 0
 
   return (
     <>
@@ -62,7 +73,7 @@ const ProductMenu = ({ categories }: ProductMenuProps) => {
                   >
                     <Item
                       variant="outline"
-                      className="bg-secondary/30 shadow-xs"
+                      className="bg-linear-to-t from-secondary/60 to-secondary/20 shadow-xs"
                     >
                       <ItemMedia variant="image" className="size-15">
                         <Image
@@ -105,7 +116,6 @@ const ProductMenu = ({ categories }: ProductMenuProps) => {
           )
         })}
       </div>
-
       <Drawer
         open={selectedProduct !== null}
         onOpenChange={(open) => {
@@ -114,30 +124,70 @@ const ProductMenu = ({ categories }: ProductMenuProps) => {
           }
         }}
       >
-        <DrawerContent>
+        <DrawerContent className="sm:mx-auto sm:w-xl">
           {selectedProduct && (
             <>
               <DrawerHeader>
-                <DrawerTitle className="mb-3 font-bold">
-                  {selectedProduct.name}
-                </DrawerTitle>
-
                 <Image
                   src={selectedProduct.image || "/ella.png"}
                   alt={selectedProduct.name}
-                  width={400}
-                  height={400}
+                  width={300}
+                  height={300}
                   className="mx-auto rounded-md bg-muted object-cover"
                 />
+                <DrawerTitle className="mx-auto mt-3 flex w-fit flex-col gap-2 text-xl font-bold">
+                  <span>{selectedProduct.name}</span>
+                  <span className="rounded-full bg-accent py-1 text-xs font-semibold text-accent-foreground">
+                    {selectedProduct.tag}
+                  </span>
+                </DrawerTitle>
               </DrawerHeader>
-
-              <div className="flex-1 p-4">
-                <div className="rounded-2xl bg-muted group-data-[swipe-axis=x]/drawer-popup:size-full group-data-[swipe-axis=y]/drawer-popup:h-80 group-data-[swipe-axis=y]/drawer-popup:w-full" />
+              <div className="px-6">
+                <div className="relative">
+                  <hr className="absolute top-5 -z-10 w-full" />
+                  <Cookie
+                    size={40}
+                    className="mx-auto bg-card px-2 text-accent"
+                  />
+                </div>
+                <div className="mb-8 text-center">کوکی شکلات نرم و تازه!</div>
+                <span className="space-x-1 text-xl font-semibold">
+                  <span>
+                    {Number(selectedProduct.price).toLocaleString("fa-IR")}
+                  </span>
+                  <span className="text-base">تومان</span>
+                </span>
               </div>
               <DrawerFooter>
-                <span className="mx-auto text-xl font-semibold">
-                  {Number(selectedProduct.price).toLocaleString("fa-IR")} تومان
-                </span>
+                {quantityInCart > 0 ? (
+                  <div className="flex items-center justify-around gap-3">
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() =>
+                        updateQuantity(selectedProduct.name, quantityInCart - 1)
+                      }
+                    >
+                      <Minus className="size-4" />
+                    </Button>
+                    <span className="min-w-6 text-center font-bold">
+                      {quantityInCart.toLocaleString("fa-ir")}
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onClick={() =>
+                        updateQuantity(selectedProduct.name, quantityInCart + 1)
+                      }
+                    >
+                      <Plus className="size-4" />
+                    </Button>
+                  </div>
+                ) : (
+                  <Button onClick={() => addItem(selectedProduct)}>
+                    افزودن به سبد خرید
+                  </Button>
+                )}
               </DrawerFooter>
             </>
           )}
